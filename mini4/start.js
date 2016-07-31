@@ -15,17 +15,17 @@ g1.enable(true);
 app.get('/', function(req, res){
 
         //console.log("test2");
-        if(res.req.query["in1"]>=0 && res.req.query["in2"]>=0 && res.req.query["value"] >= 0){
+        if(res.req.query["in1"]>=0 && res.req.query["in2"]>=0 ){
                 g0.write(res.req.query["in1"]*1);
                 g1.write(res.req.query["in2"]*1);
                 p0.write(1);
                 //p0.write(res.req.query["value"]*1);
                 // console.log("hoge");
-                console.log("in1"+res.req.query["in1"]+"in2"+res.req.query["in2"]+"value"+res.req.query["value"]);
+                console.log("in1"+res.req.query["in1"]+"in2"+res.req.query["in2"]);
 
   logger.request.info('url:'+ decodeURI(req.url));
         }
-        res.send('ok'+res.req.query["in1"]+' '+res.req.query["in2"]+' '+res.req.query["value"]);
+        res.send('ok'+res.req.query["in1"]+' '+res.req.query["in2"]);
 
 });
 
