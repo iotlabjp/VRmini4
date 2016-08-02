@@ -13,9 +13,15 @@ g0.enable(true);
 g1.period_us(250);
 g1.enable(true);
 app.get('/', function(req, res){
+                g0.write(0);
+                g1.write(0);
 
         //console.log("test2");
-        if(res.req.query["in1"]>=0 && res.req.query["in2"]>=0 ){
+        if(res.req.query["in1"]*1==0 && res.req.query["in2"]*1==0){
+		g0.write(0);
+                g1.write(0);
+		p0.write(0);
+	}else if(res.req.query["in1"]*1>=0 && res.req.query["in2"]*1>=0 ){
                 g0.write(res.req.query["in1"]*1);
                 g1.write(res.req.query["in2"]*1);
                 p0.write(1);
@@ -23,9 +29,13 @@ app.get('/', function(req, res){
                 // console.log("hoge");
                 console.log("in1"+res.req.query["in1"]+"in2"+res.req.query["in2"]);
 
-  logger.request.info('url:'+ decodeURI(req.url));
-        }
-        res.send('ok'+res.req.query["in1"]+' '+res.req.query["in2"]);
+		logger.request.info('url:'+ decodeURI(req.url));
+        }else{
+		g0.write(0);
+		g1.write(0);
+		p0.write(0);
+	}
+        res.send('ok'+g0.read()+' '+g1.read());
 
 });
 
