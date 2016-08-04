@@ -6,23 +6,28 @@ var async = require('async');
 //USB機器から受け取ったアクセルとブレーキの値を0-1に変換
 //"<Buffer 08 00 00 5e d0 1f 00 ff 80>" 7番目アクセル, 8番目ブレーキ
 function conv2int(data){
-    
+
+    var back;
     var in1 = 255-data[6]; // アクセル
     var in2 = 255-data[7]; // ブレーキ
+
+    data[0] == 136 ? back=1 : back=0;
 
     ac = Math.floor(in1*10/232)/10
     br = Math.floor(in2*10/232)/10
 
-    return [ac,br];
+    return [ac,br,back];
 }
 
-function acbr2logic(ac,br){
+function acbr2logic(ac,br,back){
   var in1, in2
 
   if(br > 0){
     in1 = br; in2 = br;
-  }else{
-	in1 = ac; in2 = 0;
+  } else if (back == 1){
+    in1 = 0; in2 = ac;
+  } else {
+    in1 = ac; in2 = 0;
   }
 
   return [in1, in2];
