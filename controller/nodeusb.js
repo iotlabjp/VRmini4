@@ -44,7 +44,7 @@ var inEndpoint = dev.interfaces[0].endpoints[0];
 
 inEndpoint.startPoll(3,64)
 
-var params = [0,0,0];
+var params = [0,0];
 
 async.forever(function(callback){
 
@@ -53,8 +53,8 @@ async.forever(function(callback){
 	    ab = conv2int(data);
 	    l = acbr2logic(ab[0], ab[1]);
 	    if(params.toString() != l.toString()){
-		sendGet(l[0], l[1], l[2]);
-		console.log(l[0], l[1], l[2]);
+		sendGet(l[0], l[1]);
+		console.log(l[0], l[1]);
 	    }
 	    params = l;
 	} else {
