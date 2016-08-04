@@ -56,7 +56,7 @@ async.forever(function(callback){
     inEndpoint.transfer(64, function (error, data) {
 	if (!error) {
 	    ab = conv2int(data);
-	    l = acbr2logic(ab[0], ab[1]);
+	    l = acbr2logic(ab[0], ab[1], ab[2]);
 	    if(params.toString() != l.toString()){
 		sendGet(l[0], l[1]);
 		console.log(l[0], l[1]);
