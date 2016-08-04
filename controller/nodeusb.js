@@ -7,32 +7,31 @@ var async = require('async');
 //"<Buffer 08 00 00 5e d0 1f 00 ff 80>" 7番目アクセル, 8番目ブレーキ
 function conv2int(data){
     
-    var ac = 255-data[6];
-    var br = 255-data[7];
+    var in1 = 255-data[6]; // アクセル
+    var in2 = 255-data[7]; // ブレーキ
 
-    a = Math.floor(ac*10/232)/10
-    b = Math.floor(br*10/232)/10
+    ac = Math.floor(in1*10/232)/10
+    br = Math.floor(in1*10/232)/10
 
-    return [a,b];
+    return [ac,br];
 }
 
 function acbr2logic(ac,br){
-    var in1, in2, value;
+  var in1, in2
 
-    if(br > 0){
-    	in1 = 1; in2 = 1; value = br;
-    }else if(ac > 0){
-	in1 = 1; in2 = 0; value = ac;
-    }else{
-	in1 = 0; in2 = 0; value = 0;
-    }
-    return [in1, in2, value];
+  if(br > 0){
+    in1 = br; in2 = br;
+  }else{
+	in1 = ac; in2 = 0;
+  }
+
+  return [in1, in2];
 }
 
 // アクセルとブレーキの値を受け取ってGetで送る関数
-function sendGet(in1,in2,value){
-    rest.get('http://192.168.42.1:9001?in1='+in1+'&in2='+in2+'&value='+value);
-    rest.get('http://localhost:9001?in1='+in1+'&in2='+in2+'&value='+value);
+function sendGet(in1,in2){
+    rest.get('http://192.168.1.8:9001?in1='+in1+'&in2='+in2);
+    rest.get('http://localhost:9001?in1='+in1+'&in2='+in2);
 }
 
 // vid, pid を指定してデバイスをオープン
