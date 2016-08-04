@@ -11,7 +11,7 @@ function conv2int(data){
     var in2 = 255-data[7]; // ブレーキ
 
     ac = Math.floor(in1*10/232)/10
-    br = Math.floor(in1*10/232)/10
+    br = Math.floor(in2*10/232)/10
 
     return [ac,br];
 }
