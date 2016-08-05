@@ -1,4 +1,4 @@
-// ライブラリの読み込み  
+﻿// ライブラリの読み込み  
 var usb = require('usb');
 var rest = require('restler');
 var async = require('async');
@@ -32,11 +32,11 @@ async.forever(function(callback){
 	    params = l;
 
 	  } else {
-	    console.log(error);
+//	    console.log(error);
 	  }
   });
 
-  setTimeout(callback, 100);
+  setTimeout(callback, 10);
 
 }, function(err){
   console.log(err);
@@ -75,6 +75,6 @@ function acbr2logic(ac,br,back){
 
 // アクセルとブレーキの値を受け取ってGetで送る関数
 function sendGet(in1,in2){
-    rest.get('http://192.168.1.8:9001?in1='+in1+'&in2='+in2);
+    rest.get('http://192.168.1.15:9001?in1='+in1+'&in2='+in2);
     rest.get('http://localhost:9001?in1='+in1+'&in2='+in2);
 }
