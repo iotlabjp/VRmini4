@@ -32,11 +32,11 @@ async.forever(function(callback){
 	    params = l;
 
 	  } else {
-	    console.log(error);
+//	    console.log(error);
 	  }
   });
 
-  setTimeout(callback, 100);
+  setTimeout(callback, 10);
 
 }, function(err){
   console.log(err);
